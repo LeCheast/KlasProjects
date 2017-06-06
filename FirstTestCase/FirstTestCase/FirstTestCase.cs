@@ -21,7 +21,6 @@ namespace FirstTestCase
                 Console.WriteLine("1 - Create new Provider");
                 Console.WriteLine("2 - Create new Provider Contact");
                 Console.WriteLine("3 - Forcast Report Sale");
-                Console.WriteLine("4 - Decision Insight - NOT WORKING");
                 Console.Write("Input: ");
                 input = Convert.ToInt16(Console.ReadLine());
                 //Thread.Sleep(5000);
@@ -34,8 +33,6 @@ namespace FirstTestCase
                     newContact();
                 else if (input == 3)//forcast report sale
                     forcastReportSale();
-                else if (input == 4)//Decision Insight
-                    decisionInsight();
             }
         }
         static void login(IWebDriver driver)
@@ -137,27 +134,6 @@ namespace FirstTestCase
             Thread.Sleep(3000);
             Console.WriteLine(Environment.NewLine + "Forcast Report Sale Test Successful" + Environment.NewLine);
             driver.Close();
-        }
-        static void decisionInsight()
-        {
-            string test = "test";
-            IWebDriver driver = new ChromeDriver();
-            login(driver);
-            driver.FindElement(By.Id("top-search")).SendKeys("John Doe");
-            driver.FindElement(By.Id("top-search")).SendKeys(Keys.Enter);
-            driver.FindElement(By.XPath("//*[@id='resultLegend']/li[2]/a")).Click();
-            Thread.Sleep(2000);
-            driver.FindElement(By.LinkText("Doe-test")).Click();
-            driver.FindElement(By.Id("openAddProductsSlideDown")).Click();
-            Thread.Sleep(2000);
-            //driver.FindElement(By.Id("assignmentsAddProduct")).SendKeys("Epic");
-            //driver.FindElement(By.Id("assignmentsAddProduct")).SendKeys(Keys.Enter);
-            //Thread.Sleep(2000);
-            driver.FindElement(By.XPath("//*[@id='assignmentsPanel']/div[1]/div[1]/table/tbody/tr[1]/td[2]/div/table/tbody/tr/td[6]/span")).Click();
-            Thread.Sleep(5000);
-            driver.SwitchTo().Window(driver.WindowHandles.Last());
-            driver.FindElement(By.XPath("//*[@id='SelectMarketSegments_chosen']/div/div/input")).Click();
-            driver.FindElement(By.XPath("//*[@id='SelectMarketSegments_chosen']/div/div/input")).SendKeys(Keys.Enter);
         }
     }
 }
