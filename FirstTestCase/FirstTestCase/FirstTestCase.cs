@@ -154,7 +154,7 @@ namespace FirstTestCase
             //driver.FindElement(By.Id("assignmentsAddProduct")).SendKeys(Keys.Enter);
             //Thread.Sleep(2000);
             driver.FindElement(By.XPath("//*[@id='assignmentsPanel']/div[1]/div[1]/table/tbody/tr[1]/td[2]/div/table/tbody/tr/td[6]/span")).Click();
-            Thread.Sleep(5000);
+            Thread.Sleep(10000);
             driver.SwitchTo().Window(driver.WindowHandles.Last());
             driver.FindElement(By.XPath("//*[@id='SelectMarketSegments_chosen']/div/div/input")).Click();
             driver.FindElement(By.XPath("//*[@id='SelectMarketSegments_chosen']/div/div/input")).SendKeys(Keys.Enter);

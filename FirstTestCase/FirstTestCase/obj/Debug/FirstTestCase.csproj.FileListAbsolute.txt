@@ -6,3 +6,11 @@ C:\Users\travis.kingery\KLAS ENTERPRISES LLC\OneDrive - KLAS ENTERPRISES LLC\Doc
 C:\Users\travis.kingery\KLAS ENTERPRISES LLC\OneDrive - KLAS ENTERPRISES LLC\Documents\Test Cases\FirstTestCase\FirstTestCase\obj\Debug\FirstTestCase.csprojResolveAssemblyReference.cache
 C:\Users\travis.kingery\KLAS ENTERPRISES LLC\OneDrive - KLAS ENTERPRISES LLC\Documents\Test Cases\FirstTestCase\FirstTestCase\obj\Debug\FirstTestCase.exe
 C:\Users\travis.kingery\KLAS ENTERPRISES LLC\OneDrive - KLAS ENTERPRISES LLC\Documents\Test Cases\FirstTestCase\FirstTestCase\obj\Debug\FirstTestCase.pdb
+C:\Users\travis.kingery\myDocuments\GitHub\KlasProjects\FirstTestCase\FirstTestCase\bin\Debug\FirstTestCase.exe.config
+C:\Users\travis.kingery\myDocuments\GitHub\KlasProjects\FirstTestCase\FirstTestCase\bin\Debug\FirstTestCase.exe
+C:\Users\travis.kingery\myDocuments\GitHub\KlasProjects\FirstTestCase\FirstTestCase\bin\Debug\FirstTestCase.pdb
+C:\Users\travis.kingery\myDocuments\GitHub\KlasProjects\FirstTestCase\FirstTestCase\bin\Debug\WebDriver.dll
+C:\Users\travis.kingery\myDocuments\GitHub\KlasProjects\FirstTestCase\FirstTestCase\bin\Debug\WebDriver.xml
+C:\Users\travis.kingery\myDocuments\GitHub\KlasProjects\FirstTestCase\FirstTestCase\obj\Debug\FirstTestCase.csprojResolveAssemblyReference.cache
+C:\Users\travis.kingery\myDocuments\GitHub\KlasProjects\FirstTestCase\FirstTestCase\obj\Debug\FirstTestCase.exe
+C:\Users\travis.kingery\myDocuments\GitHub\KlasProjects\FirstTestCase\FirstTestCase\obj\Debug\FirstTestCase.pdb
