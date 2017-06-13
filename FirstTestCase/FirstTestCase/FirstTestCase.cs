@@ -23,6 +23,7 @@ namespace FirstTestCase
                 Console.WriteLine("3 - Create new Provider Contact");
                 Console.WriteLine("4 - Decision Insight Processing");
                 Console.WriteLine("5 - Forcast Report Sale");
+                Console.WriteLine("6 - Submit For Executive Review");
                 Console.Write("Input: ");
                 input = Convert.ToInt16(Console.ReadLine());
                 //Thread.Sleep(5000);
@@ -40,12 +41,15 @@ namespace FirstTestCase
                     decisionInsightProcessingThread.Start();
                     Thread forcastReportSaleThread = new Thread(forcastReportSale);
                     forcastReportSaleThread.Start();
+                    Thread submitExecutiveReviewThread = new Thread(submitExecutiveReview);
+                    submitExecutiveReviewThread.Start();
                     //Join all threads back together
                     newProviderThread.Join();
                     newContactThread.Join();
                     decisionInsightProcessingThread.Join();
                     forcastReportSaleThread.Join();
-                }   
+                    submitExecutiveReviewThread.Join();
+                }
                 else if (input == 2)//new provider
                     newProvider();
                 else if (input == 3)//new contact
@@ -58,6 +62,8 @@ namespace FirstTestCase
                     decisionInsightProcessing();
                 else if (input == 5)//forcast report sale
                     forcastReportSale();
+                else if (input == 6)
+                    submitExecutiveReview();
             }
         }
         static void login(IWebDriver driver)
@@ -194,6 +200,50 @@ namespace FirstTestCase
             driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr/td[5]/div[" + submitIndex + "]/div/div/input[3]")).Click();
             Thread.Sleep(500);
             Console.WriteLine(Environment.NewLine + "Decision Insight Processing Test Successful" + Environment.NewLine);
+            driver.Close();
+        }
+        static void submitExecutiveReview()
+        {
+            IWebDriver driver = new ChromeDriver();
+            login(driver);
+            driver.FindElement(By.XPath("//*[@id='top-search']")).SendKeys("John Doe-Test");
+            driver.FindElement(By.XPath("//*[@id='top-search']")).SendKeys(Keys.Enter);
+            Thread.Sleep(1000);
+            driver.FindElement(By.XPath("//*[@id='ProviderContacts']/table/tbody/tr/td[1]/a/span")).Click();
+            Thread.Sleep(1000);
+            driver.FindElement(By.XPath("//*[@id='openAddProductsSlideDown']")).Click();
+            Thread.Sleep(1000);
+            driver.FindElement(By.XPath("//*[@id='assignmentsAddProduct']")).SendKeys("Epic");
+            Thread.Sleep(1000);
+            driver.FindElement(By.XPath("//*[@id='assignmentsAddProduct_listbox']/li[1]")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.XPath("//*[@id='assignmentsPanel']/table/tbody/tr/td[1]")).Click();
+            Thread.Sleep(1000);
+            int trIndex = 1;
+            bool trBool = false;
+            do
+            {
+                try
+                {
+                    if (driver.FindElement(By.XPath("//*[@id='assignmentsPanel']/div[1]/div[1]/table/tbody/tr[" + trIndex + "]/td[2]/div/table/tbody/tr/td[6]/span")).Text == "Epic: Anesthesia Information Management System")
+                    {
+                        driver.FindElement(By.XPath("//*[@id='assignmentsPanel']/div[1]/div[1]/table/tbody/tr[" + trIndex + "]/td[2]/div/table/tbody/tr/td[6]/span")).Click();
+                        trBool = true;
+                    }
+                    else
+                        ++trIndex;
+                }
+                catch { ++trIndex; }
+            } while (trBool == false);
+            Thread.Sleep(5000);
+            string newWindow = driver.WindowHandles.Last();
+            driver.Close();
+            driver.SwitchTo().Window(newWindow);
+            driver.FindElement(By.Id("submitAllForExecutiveReview")).Click();
+            Thread.Sleep(3000);
+            driver.FindElement(By.Id("numericsDataSubmitAsIs")).Click();
+            Thread.Sleep(6000);
+            Console.WriteLine(Environment.NewLine + "Submit For Executive Review Test Successful" + Environment.NewLine);
             driver.Close();
         }
     }
