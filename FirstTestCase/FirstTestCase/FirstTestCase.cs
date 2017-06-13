@@ -21,7 +21,7 @@ namespace FirstTestCase
                 Console.WriteLine("1 - Create new Provider");
                 Console.WriteLine("2 - Create new Provider Contact");
                 Console.WriteLine("3 - Forcast Report Sale");
-                Console.WriteLine("4 - Decision Insight - NOT WORKING");
+                Console.WriteLine("4 - Decision Insight Processing");
                 Console.Write("Input: ");
                 input = Convert.ToInt16(Console.ReadLine());
                 //Thread.Sleep(5000);
@@ -35,7 +35,7 @@ namespace FirstTestCase
                 else if (input == 3)//forcast report sale
                     forcastReportSale();
                 else if (input == 4)//Decision Insight
-                    decisionInsight();
+                    decisionInsightProcessing();
             }
         }
         static void login(IWebDriver driver)
@@ -83,7 +83,7 @@ namespace FirstTestCase
             driver.FindElement(By.XPath("//*[@id='AttributeListContainer']/span/div/ul/li[1]/a")).Click();
             driver.FindElement(By.Id("addressID1_Address_City")).SendKeys(test);//add city
             driver.FindElement(By.XPath("//*[@id='addressID1_addressCountry']/option[2]")).Click();//select country
-            Thread.Sleep(300);//select state
+            Thread.Sleep(3000);//select state
             driver.FindElement(By.XPath("//*[@id='addressID1_addressStateProvince']/option[6]")).Click();
             driver.FindElement(By.Id("addUpdateButton")).Click();//save new provider
             Thread.Sleep(1000);
@@ -132,32 +132,29 @@ namespace FirstTestCase
             driver.FindElement(By.Id("NewSave")).Click();//select add
             Thread.Sleep(5000);  //delete new forcast 
             driver.FindElement(By.XPath("//*[@class='fa fa-trash fa-2x']")).Click();
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
             driver.FindElement(By.XPath("/html/body/div[10]/div[2]/p[2]/button[2]")).Click();
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
             Console.WriteLine(Environment.NewLine + "Forcast Report Sale Test Successful" + Environment.NewLine);
             driver.Close();
         }
-        static void decisionInsight()
+        static void decisionInsightProcessing()
         {
-            string test = "test";
             IWebDriver driver = new ChromeDriver();
             login(driver);
-            driver.FindElement(By.Id("top-search")).SendKeys("John Doe");
-            driver.FindElement(By.Id("top-search")).SendKeys(Keys.Enter);
-            driver.FindElement(By.XPath("//*[@id='resultLegend']/li[2]/a")).Click();
-            Thread.Sleep(2000);
-            driver.FindElement(By.LinkText("Doe-test")).Click();
-            driver.FindElement(By.Id("openAddProductsSlideDown")).Click();
-            Thread.Sleep(2000);
-            //driver.FindElement(By.Id("assignmentsAddProduct")).SendKeys("Epic");
-            //driver.FindElement(By.Id("assignmentsAddProduct")).SendKeys(Keys.Enter);
-            //Thread.Sleep(2000);
-            driver.FindElement(By.XPath("//*[@id='assignmentsPanel']/div[1]/div[1]/table/tbody/tr[1]/td[2]/div/table/tbody/tr/td[6]/span")).Click();
-            Thread.Sleep(10000);
-            driver.SwitchTo().Window(driver.WindowHandles.Last());
-            driver.FindElement(By.XPath("//*[@id='SelectMarketSegments_chosen']/div/div/input")).Click();
-            driver.FindElement(By.XPath("//*[@id='SelectMarketSegments_chosen']/div/div/input")).SendKeys(Keys.Enter);
+            driver.Url = "http://dev-toolbox/dataentry/winLoss/Review?ReviewStep=2";
+            string name = driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr[1]/td[1]/a")).Text;
+            driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr[1]/td[5]/div[2]/div/div/input[3]")).Click();
+            driver.Url = "http://dev-toolbox/dataentry/winLoss/Review?ReviewStep=3";
+            driver.FindElement(By.XPath("//*[@id='ReviewTable_filter']/label/input")).SendKeys(name);
+            Thread.Sleep(1000);
+            driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr/td[5]/div[2]/div/div/input[4]")).Click();
+            driver.Url = "http://dev-toolbox/dataentry/winLoss/Review?ReviewStep=4";
+            driver.FindElement(By.XPath("//*[@id='ReviewTable_filter']/label/input")).SendKeys(name);
+            Thread.Sleep(1000);
+            driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr/td[5]/div[2]/div/div/input[3]")).Click();
+            Thread.Sleep(500);
+            Console.WriteLine(Environment.NewLine + "Decision Insight Processing Test Successful" + Environment.NewLine);
         }
     }
 }
