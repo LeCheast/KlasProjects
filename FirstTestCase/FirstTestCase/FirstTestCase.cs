@@ -18,24 +18,42 @@ namespace FirstTestCase
                 int input = 0;
                 Console.WriteLine("What test would you like to run?");
                 Console.WriteLine("0 - Exit");
-                Console.WriteLine("1 - Create new Provider");
-                Console.WriteLine("2 - Create new Provider Contact");
-                Console.WriteLine("3 - Forcast Report Sale");
+                Console.WriteLine("1 - Run All Test");
+                Console.WriteLine("2 - Create new Provider");
+                Console.WriteLine("3 - Create new Provider Contact");
                 Console.WriteLine("4 - Decision Insight Processing");
+                Console.WriteLine("5 - Forcast Report Sale");
                 Console.Write("Input: ");
                 input = Convert.ToInt16(Console.ReadLine());
                 //Thread.Sleep(5000);
                 //input = 3;
+
                 if (input == 0)//exit
                     break;
-                else if (input == 1)//new provider
+                else if (input == 1)//run all tests
+                {
+                    Thread newProviderThread = new Thread(newProvider);
+                    newProviderThread.Start();
+                    Thread newContactThread = new Thread(newContact);
+                    newContactThread.Start();
+                    Thread decisionInsightProcessingThread = new Thread(decisionInsightProcessing);
+                    decisionInsightProcessingThread.Start();
+                    Thread forcastReportSaleThread = new Thread(forcastReportSale);
+                    forcastReportSaleThread.Start();
+                    //Join all threads back together
+                    newProviderThread.Join();
+                    newContactThread.Join();
+                    decisionInsightProcessingThread.Join();
+                    forcastReportSaleThread.Join();
+                }   
+                else if (input == 2)//new provider
                     newProvider();
-                else if (input == 2)//new contact
+                else if (input == 3)//new contact
                     newContact();
-                else if (input == 3)//forcast report sale
-                    forcastReportSale();
                 else if (input == 4)//Decision Insight
                     decisionInsightProcessing();
+                else if (input == 5)//forcast report sale
+                    forcastReportSale();
             }
         }
         static void login(IWebDriver driver)
@@ -144,17 +162,34 @@ namespace FirstTestCase
             login(driver);
             driver.Url = "http://dev-toolbox/dataentry/winLoss/Review?ReviewStep=2";
             string name = driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr[1]/td[1]/a")).Text;
-            driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr[1]/td[5]/div[2]/div/div/input[3]")).Click();
+            bool colBool = false;
+            int submitIndex = 2;
+            Thread.Sleep(1000);
+            do
+            {
+                try
+                {
+                    driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr[1]/td[5]/div[" + submitIndex + "]/div/div/input[3]")).Click();
+                    colBool = true;
+                }
+                catch
+                {
+                    ++submitIndex;
+                }
+            } while (colBool == false);
+            Thread.Sleep(1000);
             driver.Url = "http://dev-toolbox/dataentry/winLoss/Review?ReviewStep=3";
             driver.FindElement(By.XPath("//*[@id='ReviewTable_filter']/label/input")).SendKeys(name);
+            Thread.Sleep(5000);
+            driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr/td[5]/div[" + submitIndex + "]/div/div/input[4]")).Click();
             Thread.Sleep(1000);
-            driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr/td[5]/div[2]/div/div/input[4]")).Click();
             driver.Url = "http://dev-toolbox/dataentry/winLoss/Review?ReviewStep=4";
             driver.FindElement(By.XPath("//*[@id='ReviewTable_filter']/label/input")).SendKeys(name);
-            Thread.Sleep(1000);
-            driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr/td[5]/div[2]/div/div/input[3]")).Click();
+            Thread.Sleep(5000);
+            driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr/td[5]/div[" + submitIndex + "]/div/div/input[3]")).Click();
             Thread.Sleep(500);
             Console.WriteLine(Environment.NewLine + "Decision Insight Processing Test Successful" + Environment.NewLine);
+            driver.Close();
         }
     }
 }
