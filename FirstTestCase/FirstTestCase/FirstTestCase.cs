@@ -18,21 +18,11 @@ namespace FirstTestCase
                 int input = 0;
                 Console.WriteLine("What test would you like to run?");
                 Console.WriteLine("0 - Exit");
-<<<<<<< HEAD
-                Console.WriteLine("1 - Create new Provider");
-                Console.WriteLine("2 - Create new Provider Contact");
-                Console.WriteLine("3 - Forcast Report Sale");
-<<<<<<< HEAD
-=======
-                Console.WriteLine("4 - Decision Insight Processing");
->>>>>>> FSB001
-=======
                 Console.WriteLine("1 - Run All Test");
                 Console.WriteLine("2 - Create new Provider");
                 Console.WriteLine("3 - Create new Provider Contact");
                 Console.WriteLine("4 - Decision Insight Processing");
                 Console.WriteLine("5 - Forcast Report Sale");
->>>>>>> FSB001
                 Console.Write("Input: ");
                 input = Convert.ToInt16(Console.ReadLine());
                 //Thread.Sleep(5000);
@@ -60,20 +50,14 @@ namespace FirstTestCase
                     newProvider();
                 else if (input == 3)//new contact
                     newContact();
-<<<<<<< HEAD
                 else if (input == 3)//forcast report sale
                     forcastReportSale();
-<<<<<<< HEAD
-=======
                 else if (input == 4)//Decision Insight
                     decisionInsightProcessing();
->>>>>>> FSB001
-=======
                 else if (input == 4)//Decision Insight
                     decisionInsightProcessing();
                 else if (input == 5)//forcast report sale
                     forcastReportSale();
->>>>>>> FSB001
             }
         }
         static void login(IWebDriver driver)
@@ -176,13 +160,12 @@ namespace FirstTestCase
             Console.WriteLine(Environment.NewLine + "Forcast Report Sale Test Successful" + Environment.NewLine);
             driver.Close();
         }
-<<<<<<< HEAD
-=======
         static void decisionInsightProcessing()
         {
             IWebDriver driver = new ChromeDriver();
             login(driver);
             driver.Url = "http://dev-toolbox/dataentry/winLoss/Review?ReviewStep=2";
+            Thread.Sleep(1000);
             string name = driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr[1]/td[1]/a")).Text;
             bool colBool = false;
             int submitIndex = 2;
@@ -199,7 +182,7 @@ namespace FirstTestCase
                     ++submitIndex;
                 }
             } while (colBool == false);
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
             driver.Url = "http://dev-toolbox/dataentry/winLoss/Review?ReviewStep=3";
             driver.FindElement(By.XPath("//*[@id='ReviewTable_filter']/label/input")).SendKeys(name);
             Thread.Sleep(5000);
@@ -213,6 +196,5 @@ namespace FirstTestCase
             Console.WriteLine(Environment.NewLine + "Decision Insight Processing Test Successful" + Environment.NewLine);
             driver.Close();
         }
->>>>>>> FSB001
     }
 }
