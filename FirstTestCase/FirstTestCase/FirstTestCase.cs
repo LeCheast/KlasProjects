@@ -104,7 +104,7 @@ namespace FirstTestCase
             driver.FindElement(By.LinkText("Add Provider")).Click();
             driver.FindElement(By.Id("OrgName")).SendKeys(test);//add org name
             driver.FindElement(By.XPath("//*[@id='OrgTypeSelect']/option[4]")).Click();//Org type
-            Thread.Sleep(2000);//type of org
+            Thread.Sleep(5000);//type of org
             driver.FindElement(By.XPath("//*[@id='OrgSubTypeSelect']/option[5]")).Click();
             Thread.Sleep(1000);//add specialties
             driver.FindElement(By.XPath("//*[@id='AttributeListContainer']/span/div/button")).Click();
