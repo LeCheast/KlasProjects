@@ -175,12 +175,12 @@ namespace FirstTestCase
             string name = driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr[1]/td[1]/a")).Text;
             bool colBool = false;
             int submitIndex = 2;
-            Thread.Sleep(1000);
+            Thread.Sleep(3000);
             do
             {
                 try
                 {
-                    driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr[1]/td[5]/div[" + submitIndex + "]/div/div/input[3]")).Click();
+                    driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr[1]/td[5]/div[" + submitIndex + "]/div/div/input[4]")).Click();
                     colBool = true;
                 }
                 catch
@@ -191,13 +191,13 @@ namespace FirstTestCase
             Thread.Sleep(2000);
             driver.Url = "http://dev-toolbox/dataentry/winLoss/Review?ReviewStep=3";
             driver.FindElement(By.XPath("//*[@id='ReviewTable_filter']/label/input")).SendKeys(name);
-            Thread.Sleep(5000);
-            driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr/td[5]/div[" + submitIndex + "]/div/div/input[4]")).Click();
+            Thread.Sleep(2000);
+            driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr/td[5]/div[" + submitIndex + "]/div/div/input[5]")).Click();
             Thread.Sleep(1000);
             driver.Url = "http://dev-toolbox/dataentry/winLoss/Review?ReviewStep=4";
             driver.FindElement(By.XPath("//*[@id='ReviewTable_filter']/label/input")).SendKeys(name);
             Thread.Sleep(5000);
-            driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr/td[5]/div[" + submitIndex + "]/div/div/input[3]")).Click();
+            driver.FindElement(By.XPath("//*[@id='ReviewTable']/tbody/tr/td[5]/div[" + submitIndex + "]/div/div/input[4]")).Click();
             Thread.Sleep(500);
             Console.WriteLine(Environment.NewLine + "Decision Insight Processing Test Successful" + Environment.NewLine);
             driver.Close();
