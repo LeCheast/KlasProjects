@@ -11,10 +11,12 @@ namespace FirstTestCase
 {
     class FirstTestCase
     {
+        public static List<string> success = new List<string>();
         static void Main(string[] args)
         {
-            while(true)
+            while (true)
             {
+
                 int input = 0;
                 Console.WriteLine("What test would you like to run?");
                 Console.WriteLine("0 - Exit");
@@ -149,6 +151,7 @@ namespace FirstTestCase
             IWebDriver driver = new ChromeDriver();
             login(driver);
             driver.FindElement(By.LinkText("Sales Management")).Click();//select sales managment
+            Thread.Sleep(2000);
             driver.FindElement(By.LinkText("Sales Mgmt Tool")).Click();//select sales mgmt tool
             Thread.Sleep(5000);//Impersonate someone
             driver.FindElement(By.XPath("//*[@id='notImpersonating']/span/span/span/span")).Click();
